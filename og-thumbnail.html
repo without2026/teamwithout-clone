@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#f6f8fb; --surface:#ffffff; --line:#e5e9f0; --line-soft:#eef1f7;
+    --text:#1a1f2e; --text-2:#3a4358; --text-3:#5a6478; --text-4:#9aa4bc;
+    --accent:#1e2a4a; --accent-2:#33476e;
+    --give:#c58e68; --give-bg:#f4ece4;
+    --take:#5582a3; --take-bg:#e8eef5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    background:
+      radial-gradient(760px 460px at 88% -12%, rgba(30,42,74,0.07), transparent 60%),
+      radial-gradient(620px 520px at -8% 30%, rgba(85,130,163,0.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    position:relative;
+  }
+  /* subtle mist grid */
+  body::before{
+    content:""; position:absolute; inset:0;
+    background-image:linear-gradient(rgba(30,42,74,0.025) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(30,42,74,0.025) 1px,transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(900px 600px at 70% 50%, #000, transparent 80%);
+            mask-image:radial-gradient(900px 600px at 70% 50%, #000, transparent 80%);
+  }
+  .wrap{position:relative;height:100%;display:flex;align-items:center;padding:0 72px;gap:48px}
+
+  /* ===== LEFT ===== */
+  .left{flex:1 1 0;min-width:0}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 16px;border-radius:999px;
+    background:rgba(30,42,74,0.07);
+    color:var(--accent);font-size:18px;font-weight:600;letter-spacing:-0.01em;
+    margin-bottom:26px;
+  }
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--give)}
+  h1{
+    font-size:66px;font-weight:800;line-height:1.16;letter-spacing:-0.035em;
+    color:var(--text);
+  }
+  h1 .accent{color:var(--accent-2)}
+  .sub{
+    margin-top:26px;font-size:22px;font-weight:500;line-height:1.55;
+    color:var(--text-3);letter-spacing:-0.02em;max-width:560px;
+  }
+  .sub b{color:var(--text-2);font-weight:700}
+  .brandrow{
+    margin-top:46px;display:flex;align-items:center;gap:16px;
+  }
+  .wordmark{font-size:34px;font-weight:800;letter-spacing:-0.03em;color:var(--text)}
+  .wordmark .be{color:var(--text)}
+  .wordmark .calm{color:var(--accent-2)}
+  .wordmark .dot{color:var(--give)}
+  .ko{font-size:20px;font-weight:700;color:var(--text-3);letter-spacing:-0.01em}
+  .sep{width:1px;height:22px;background:var(--line)}
+  .url{font-size:19px;font-weight:600;color:var(--text-4);letter-spacing:-0.01em}
+
+  /* ===== RIGHT : person card ===== */
+  .card{
+    flex:0 0 392px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:0 30px 70px -28px rgba(30,42,74,0.45), 0 8px 24px -12px rgba(30,42,74,0.18);
+    padding:26px 24px;
+    transform:rotate(-1.4deg);
+  }
+  .person{display:flex;align-items:center;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--line-soft)}
+  .avatar{
+    width:52px;height:52px;border-radius:16px;flex:0 0 52px;
+    background:linear-gradient(180deg,#1e2a4a,#33476e);
+    color:#fff;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  }
+  .pinfo .pname{font-size:21px;font-weight:800;letter-spacing:-0.02em;color:var(--text)}
+  .pinfo .pmeta{margin-top:3px;font-size:14px;font-weight:500;color:var(--text-4);letter-spacing:-0.01em}
+  .star{margin-left:auto;font-size:22px;color:var(--give)}
+
+  .grouplabel{display:flex;align-items:center;gap:8px;margin:20px 0 12px;font-size:14px;font-weight:700;letter-spacing:-0.01em}
+  .grouplabel .gdot{width:7px;height:7px;border-radius:50%}
+
+  .item{
+    border:1px solid var(--line);border-radius:14px;padding:14px 14px;margin-bottom:10px;
+    position:relative;
+  }
+  .item.give{background:#fbf6f1;border-color:#ecd9c9}
+  .item.take{background:#f1f6fb;border-color:#d3e0ee}
+  .item .top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .chip{font-size:12px;font-weight:800;letter-spacing:-0.01em;padding:3px 9px;border-radius:999px;color:#fff}
+  .chip.give{background:var(--give)}
+  .chip.take{background:var(--take)}
+  .dday{margin-left:auto;font-size:13px;font-weight:800;letter-spacing:-0.01em}
+  .dday.give{color:#b06f44}
+  .dday.take{color:#3f6c95}
+  .item .txt{font-size:15px;font-weight:600;line-height:1.45;color:var(--text);letter-spacing:-0.02em}
+  .item .src{margin-top:6px;font-size:12.5px;font-weight:500;color:var(--text-4);letter-spacing:-0.01em}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>비즈니스 리더를 위한 AI 비서</div>
+      <h1>약속은 놓치지 않고,<br><span class="accent">신뢰는 쌓입니다.</span></h1>
+      <p class="sub">전화·미팅·메일·메신저에 흩어진 업무 대화를<br><b>사람별로 자동 정리</b>해 챙겨주는 AI 비서.</p>
+      <div class="brandrow">
+        <span class="wordmark"><span class="be">Be</span><span class="calm">Calm</span><span class="dot">.</span></span>
+        <span class="ko">비컴</span>
+        <span class="sep"></span>
+        <span class="url">teamwithout.com</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="person">
+        <div class="avatar">김</div>
+        <div class="pinfo">
+          <div class="pname">김도현 · 거래처 대표</div>
+          <div class="pmeta">관계 47일 · 12 인터랙션 · 마지막 6/1</div>
+        </div>
+        <div class="star">★</div>
+      </div>
+
+      <div class="grouplabel" style="color:var(--give)"><span class="gdot" style="background:var(--give)"></span>다음 행동 · Give</div>
+      <div class="item give">
+        <div class="top"><span class="chip give">GIVE</span><span class="dday give">오늘까지</span></div>
+        <div class="txt">수정 계약서 회신 · 단가 조항 반영</div>
+        <div class="src">6/1 통화에서 약속</div>
+      </div>
+
+      <div class="grouplabel" style="color:var(--take)"><span class="gdot" style="background:var(--take)"></span>기다리는 것 · Take</div>
+      <div class="item take">
+        <div class="top"><span class="chip take">TAKE</span><span class="dday take">D-3</span></div>
+        <div class="txt">레퍼런스 자료 회신 받기</div>
+        <div class="src">5/28 메일에서 합의</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
