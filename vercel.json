@@ -25,6 +25,21 @@
       "source": "/",
       "destination": "https://becalm.kr/",
       "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "https://becalm.kr/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/delete-account",
+      "destination": "https://becalm.kr/delete-account",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "https://becalm.kr/terms",
+      "permanent": true
     }
   ]
 }
